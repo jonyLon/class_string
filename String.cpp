@@ -11,15 +11,18 @@ void mString::strCopy(char*& dest, const char* source)
 	dest = new char[length];
 	strcpy_s(dest, length, source);
 }
-void mString::input() {
-	cout << "Enter string: ";
-	if (this->str[0] == '\0')
-	{
-		cin.getline(this->str, this->size);
+void mString::operator=(const mString& other)
+{
+	if (this == &other) {
+		return;
 	}
-	else {
+	strCopy(this->str, other.str);
+}
+void mString::input() {
 		char line[1000];
 		cin.getline(line, 1000);
 		strCopy(this->str, line);
-	}
+}
+void mString::input(const char* line) {
+		strCopy(this->str, line);
 }

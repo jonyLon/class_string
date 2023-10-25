@@ -13,7 +13,7 @@ public:
 
 	mString() : mString(80) {};
 	mString(int size) {
-		this->str = new char[size];
+		this->str = new char[size + 1];
 		this->str[0] = '\0';
 		this->size = size;
 		this->count++;
@@ -22,13 +22,18 @@ public:
 		strCopy(this->str, line);
 		this->count++;
 	};
+	mString(const mString &other) {
+		strCopy(this->str, other.str);
+	}
 	~mString() {
 		if (this->str != nullptr) {
 			delete[] this->str;
 			this->count--;
 		}
 	}
+	void operator =(const mString& other);
 	void input();
+	void input(const char* line);
 	inline void display() const{
 		cout << this->str << endl;
 	}
